@@ -94,7 +94,8 @@ int main(){
                     saldo_atual = 0;
                     cout << "Devolvido 1,50\n Saldo 0,00\n";
                 } else if (entrada == "A"){                    
-                    saldo_atual = 0;                   
+                    saldo_atual = 0;
+                    total_aguas++;               
                     cout << "Água comprada\n Saldo 0,00\n";
                 } else {
                     saldo_atual = 150;

@@ -4,8 +4,10 @@
 
 using namespace std;
 
-int main(){
-    int saldo_atual = -1;    
+int main(){ 
+    int saldo_atual = -1;
+    int total_aguas = 0;
+    int total_refris = 0; 
     bool a_funcionar = true;
     string entrada;
 
@@ -91,8 +93,8 @@ int main(){
                 } else if(entrada == "D"){
                     saldo_atual = 0;
                     cout << "Devolvido 1,50\n Saldo 0,00\n";
-                } else if (entrada == "A"){
-                    saldo_atual = 0;
+                } else if (entrada == "A"){                    
+                    saldo_atual = 0;                   
                     cout << "Água comprada\n Saldo 0,00\n";
                 } else {
                     saldo_atual = 150;

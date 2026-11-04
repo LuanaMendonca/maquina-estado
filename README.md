@@ -4,7 +4,7 @@
 **Universidade:** Universidade Federal do Rio Grande do Norte (UFRN)  
 **Professor:** Martin A. Musicante
 
-## 1. Integrantes
+## 1. Integrantes e participação
 
 - Erick Calixto – 100%
 - Luana Mendonça – 100%

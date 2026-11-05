@@ -1,117 +1,163 @@
+
 #include <iostream>
 #include <string>
 #include <iomanip>
 
 using namespace std;
 
-int main(){ 
+// Funcao para mostrar valores em reais
+void mostrar_valor(int valor) {
+    cout << "R$ " << valor / 100 << ","
+         << setw(2) << setfill('0') << valor % 100
+         << setfill(' ');
+}
+
+int main() {
     int saldo_atual = -1;
     int total_aguas = 0;
-    int total_refris = 0; 
+    int total_refris = 0;
+    int total_vendas = 0;
+    int deposito = 0;
+
     bool a_funcionar = true;
     string entrada;
 
-    cout << "Aguarde o inicio da máquina...\n";
-    
-    while(a_funcionar){
+    cout << "Aguarde o inicio da maquina...\n";
+
+    while (a_funcionar) {
         cin >> entrada;
 
-        switch (saldo_atual){        
-            case -1:
-                if(entrada == "Q"){
-                    saldo_atual = 0;
-                    cout << "Máquina Ligada\n Saldo: 0,00\n";
-                } else {
-                    cout << "Máquina Desligada";
-                }
-                break;
-
-            case 0:
-                if(entrada == "Q"){
-                    saldo_atual = -1;
-                    cout << "Máquina Desligada\n";
-                } else if(entrada == "a50") {
-                    saldo_atual = 50;
-                    cout << "Saldo 0,50\n";
-                } else if(entrada == "a100"){
-                    saldo_atual = 100;
-                    cout << "Saldo 1,00\n";                
-                } else if(entrada == "D"){
-                    saldo_atual = 0;
-                    cout << "Devolvido 0,00\n Saldo 0,00\n"; 
-                } else {
-                    saldo_atual = 0;
-                    cout << "Saldo insuficiente!\n";
-                }        
-                break;
-
-            case 50:
-                if(entrada == "Q"){                    
-                    cout << "Ainda há saldo na máquina, não é possível desligar\n";                
-                } else if(entrada == "a50"){
-                    saldo_atual = 100;
-                    cout << "Saldo 1,00\n";
-                } else if(entrada == "a100"){
-                    saldo_atual = 150;                
-                    cout << "Saldo 1,50\n";                
-                } else if(entrada == "D"){
-                    saldo_atual = 0;
-                    cout << "Devolvido 0,50\n Saldo 0,00\n"; 
-                } else {
-                    saldo_atual = 50;
-                    cout << "Saldo insuficiente!\n";
-                }
-                break;
-            
-            case 100:
-                if(entrada == "Q"){
-                    cout << "Ainda há saldo na máquina, não é possível desligar\n";
-                } else if(entrada == "a50"){
-                    saldo_atual = 150;
-                    cout << "Saldo 1,50\n";
-                } else if(entrada == "a100"){
-                    saldo_atual = 200;
-                    cout << "Saldo 2,00\n";
-                } else if(entrada == "D"){
-                    saldo_atual = 0;
-                    cout << "Devolvido 1,00\n Saldo 0,00\n"; 
-                } else {
-                    saldo_atual = 100;
-                    cout << "Saldo insuficiente!\n";
-                }
-                break;
-
-            case 150:
-                if(entrada == "Q"){
-                    cout << "Ainda há saldo na máquina, não é possível desligar\n";
-                } else if(entrada == "a50"){
-                    saldo_atual = 200;
-                    cout << "Saldo 2,00\n";
-                } else if(entrada == "a100"){
-                    saldo_atual = 250;
-                    cout << "Saldo 2,50\n";
-                } else if(entrada == "D"){
-                    saldo_atual = 0;
-                    cout << "Devolvido 1,50\n Saldo 0,00\n";
-                } else if (entrada == "A"){                    
-                    saldo_atual = 0;
-                    total_aguas++;               
-                    cout << "Água comprada\n Saldo 0,00\n";
-                } else {
-                    saldo_atual = 150;
-                    cout << "Saldo insuficiente!\n";
-                }                
-                break;
-
+        // Estado: maquina desligada
+        if (saldo_atual == -1) {
+            if (entrada == "Q") {
+                saldo_atual = 0;
+                cout << "Maquina ligada!\n";
+                cout << "Saldo: ";
+                mostrar_valor(saldo_atual);
+                cout << "\n";
+            } else {
+                cout << "Maquina desligada.\n";
+            }
         }
-            
 
-        
-        
-        
+        // Estados: maquina ligada
+        else {
+            switch (saldo_atual) {
+
+                case 0:
+                case 50:
+                case 100:
+                case 150:
+                case 200:
+                case 250:
+
+                    if (entrada == "Q") {
+                        if (saldo_atual == 0) {
+                            cout << "\n--- RELATORIO DA MAQUINA ---\n";
+
+                            cout << "Total de aguas vendidas: "
+                                 << total_aguas << "\n";
+
+                            cout << "Total de refrigerantes vendidos: "
+                                 << total_refris << "\n";
+
+                            cout << "Total de vendas: ";
+                            mostrar_valor(total_vendas);
+                            cout << "\n";
+
+                            cout << "Moedas armazenadas: ";
+                            mostrar_valor(deposito);
+                            cout << "\n";
+
+                            saldo_atual = -1;
+                            cout << "Maquina desligada.\n";
+                        } else {
+                            cout << "Ainda existe saldo na maquina. "
+                                 << "Nao e possivel desligar.\n";
+                        }
+                    }
+
+                    else if (entrada == "I50") {
+                        if (saldo_atual + 50 <= 250) {
+                            saldo_atual += 50;
+                            deposito += 50;
+
+                            cout << "Saldo: ";
+                            mostrar_valor(saldo_atual);
+                            cout << "\n";
+                        } else {
+                            cout << "Limite excedido! Moeda devolvida.\n";
+                        }
+                    }
+
+                    else if (entrada == "I100") {
+                        if (saldo_atual + 100 <= 250) {
+                            saldo_atual += 100;
+                            deposito += 100;
+
+                            cout << "Saldo: ";
+                            mostrar_valor(saldo_atual);
+                            cout << "\n";
+                        } else {
+                            cout << "Limite excedido! Moeda devolvida.\n";
+                        }
+                    }
+
+                    else if (entrada == "A") {
+                        if (saldo_atual >= 150) {
+                            saldo_atual -= 150;
+                            total_aguas++;
+                            total_vendas += 150;
+
+                            cout << "Agua comprada!\n";
+                            cout << "Saldo restante: ";
+                            mostrar_valor(saldo_atual);
+                            cout << "\n";
+                        } else {
+                            cout << "Saldo insuficiente para comprar agua.\n";
+                        }
+                    }
+
+                    else if (entrada == "R") {
+                        if (saldo_atual >= 200) {
+                            saldo_atual -= 200;
+                            total_refris++;
+                            total_vendas += 200;
+
+                            cout << "Refrigerante comprado!\n";
+                            cout << "Saldo restante: ";
+                            mostrar_valor(saldo_atual);
+                            cout << "\n";
+                        } else {
+                            cout << "Saldo insuficiente para comprar refrigerante.\n";
+                        }
+                    }
+
+                    else if (entrada == "D") {
+                        cout << "Valor devolvido: ";
+                        mostrar_valor(saldo_atual);
+                        cout << "\n";
+
+                        deposito -= saldo_atual;
+                        saldo_atual = 0;
+
+                        cout << "Saldo atual: ";
+                        mostrar_valor(saldo_atual);
+                        cout << "\n";
+                    }
+
+                    else {
+                        cout << "Entrada invalida!\n";
+                    }
+
+                    break;
+
+                default:
+                    cout << "Estado invalido!\n";
+                    break;
+            }
+        }
     }
 
-    
-
-
+    return 0;
 }

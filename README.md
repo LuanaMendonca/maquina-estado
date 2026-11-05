@@ -57,6 +57,10 @@ A máquina foi representada utilizando um tipo enumerado (`enum`), com os seguin
 
 Cada estado representa uma situação possível da máquina durante seu funcionamento.
 
+### Diagrama de Estados (AFD)
+
+![Diagrama de Estados da Máquina](diagrama.png)
+
 As transições acontecem de acordo com as entradas recebidas, atualizando o saldo e o estado correspondente.
 
 ## 5. Tecnologias utilizadas

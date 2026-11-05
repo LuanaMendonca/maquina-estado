@@ -59,7 +59,7 @@ Cada estado representa uma situação possível da máquina durante seu funciona
 
 ### Diagrama de Estados (AFD)
 
-![Diagrama de Estados da Máquina](diagrama(1).png)
+![Diagrama de Estados da Máquina](Diagrama(1).png)
 
 As transições acontecem de acordo com as entradas recebidas, atualizando o saldo e o estado correspondente.
 
